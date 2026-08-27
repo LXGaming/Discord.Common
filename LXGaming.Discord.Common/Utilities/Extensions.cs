@@ -1,4 +1,8 @@
+using Discord;
+using Discord.Rest;
+using Discord.WebSocket;
 using LXGaming.Discord.Common.Access;
+using LXGaming.Discord.Common.Listeners;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -11,6 +15,16 @@ public static class Extensions {
         return services
             .AddScoped<TService>()
             .AddScoped<IAccessService>(provider => provider.GetRequiredService<TService>());
+    }
+
+    public static IServiceCollection AddDiscordClient<TService>(this IServiceCollection services, TService client)
+        where TService : BaseSocketClient {
+        return services
+            .AddSingleton(client)
+            .AddSingleton<BaseSocketClient>(provider => provider.GetRequiredService<TService>())
+            .AddSingleton<BaseDiscordClient>(provider => provider.GetRequiredService<TService>())
+            .AddSingleton<IDiscordClient>(provider => provider.GetRequiredService<TService>())
+            .AddSingleton<IHostedService, LogListener>();
     }
 
     public static IServiceCollection AddDiscordService<TService>(this IServiceCollection services)
