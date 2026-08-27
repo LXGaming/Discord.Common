@@ -1,0 +1,13 @@
+<Project>
+  <Target Name="Archive"
+          Condition="'$(IsPublishable)' == 'true' and '$(CI)' == 'true'"
+          AfterTargets="Publish">
+    <PropertyGroup>
+      <ArchiveDir>$([System.IO.Path]::Combine($(SolutionDir), "dist"))</ArchiveDir>
+      <ArchiveName>$(ProjectName.Substring($([MSBuild]::Add($(ProjectName.IndexOf('.')), 1))))-$(RuntimeIdentifier)</ArchiveName>
+      <ArchivePath>$([System.IO.Path]::Combine($(ArchiveDir), "$(ArchiveName).zip"))</ArchivePath>
+    </PropertyGroup>
+    <MakeDir Directories="$(ArchiveDir)" />
+    <ZipDirectory DestinationFile="$(ArchivePath)" SourceDirectory="$(ProjectDir)$(PublishDir)" />
+  </Target>
+</Project>

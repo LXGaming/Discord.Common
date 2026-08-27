@@ -1,0 +1,45 @@
+name: .NET
+
+on:
+  create:
+    tags: [ 'v*.*.*' ]
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  id-token: write
+  packages: read
+
+env:
+  CONFIGURATION: Release
+  DOTNET_VERSION: 10.0.x
+
+jobs:
+  dotnet:
+    name: .NET
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration "$CONFIGURATION" --no-restore
+      - name: Test
+        run: dotnet test --configuration "$CONFIGURATION" --no-restore --verbosity normal
+      - name: Login to NuGet
+        if: github.event_name == 'create' && github.event.ref_type == 'tag'
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USER || vars.NUGET_USER }}
+      - name: Push to nuget.org
+        if: github.event_name == 'create' && github.event.ref_type == 'tag'
+        run: dotnet nuget push */bin/Release/*.nupkg --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --skip-duplicate --source https://api.nuget.org/v3/index.json
