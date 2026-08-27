@@ -1,6 +1,7 @@
 using Discord;
 using Discord.Interactions;
 using LXGaming.Discord.Common.Interactions.Attributes;
+using LXGaming.Discord.Common.Interactions.Results;
 using LXGaming.Discord.Common.Utilities;
 
 namespace LXGaming.Discord.Common.Interactions;
@@ -221,6 +222,18 @@ public abstract class InteractionBase<T> : InteractionModuleBase<T> where T : cl
     protected override Task RespondWithPremiumRequiredAsync(RequestOptions? options = null) {
         EnsureResponse(false);
         return base.RespondWithPremiumRequiredAsync(options);
+    }
+
+    protected InteractionResult Error(string reason) {
+        return InteractionResult.FromError(reason);
+    }
+
+    protected InteractionResult Error(Exception ex) {
+        return InteractionResult.FromError(ex);
+    }
+
+    protected InteractionResult Success() {
+        return InteractionResult.FromSuccess();
     }
 
     private void EnsureResponse(bool value) {
