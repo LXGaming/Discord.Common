@@ -26,4 +26,8 @@
     <None Include="..\PACKAGE.md" Pack="true" PackagePath="\" Visible="false" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Discord.Net.Interactions" Version="3.20.1" />
+  </ItemGroup>
+
 </Project>
