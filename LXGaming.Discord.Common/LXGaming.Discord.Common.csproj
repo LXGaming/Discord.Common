@@ -29,6 +29,7 @@
   <ItemGroup>
     <PackageReference Include="Discord.Net.Interactions" Version="3.20.1" />
     <PackageReference Include="Discord.Net.WebSocket" Version="3.20.1" />
+    <PackageReference Include="LXGaming.Common" Version="1.11.9" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">

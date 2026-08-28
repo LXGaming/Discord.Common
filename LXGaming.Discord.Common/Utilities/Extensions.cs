@@ -3,6 +3,7 @@ using Discord.Rest;
 using Discord.WebSocket;
 using LXGaming.Discord.Common.Access;
 using LXGaming.Discord.Common.Listeners;
+using LXGaming.Discord.Common.Scheduler;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -33,5 +34,19 @@ public static class Extensions {
             .AddSingleton<TService>()
             .AddSingleton<IDiscordService>(provider => provider.GetRequiredService<TService>())
             .AddSingleton<IHostedService>(provider => provider.GetRequiredService<TService>());
+    }
+
+    public static IServiceCollection AddSchedulerService(this IServiceCollection services) {
+        return services.AddSchedulerService<DefaultSchedulerService>();
+    }
+
+    public static IServiceCollection AddSchedulerService<TService>(this IServiceCollection services)
+        where TService : class, ISchedulerService, IHostedService {
+        return services
+            .AddSingleton<TService>()
+            .AddSingleton<ISchedulerService>(provider => provider.GetRequiredService<TService>())
+            .AddSingleton<IHostedService>(provider => provider.GetRequiredService<TService>())
+            .AddSingleton<SchedulerListener>()
+            .AddSingleton<IHostedService>(provider => provider.GetRequiredService<SchedulerListener>());
     }
 }
