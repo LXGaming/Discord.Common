@@ -3,7 +3,7 @@ using Discord.Interactions;
 
 namespace LXGaming.Discord.Common.Interactions.Results;
 
-public sealed class TeamRoleResult : PreconditionResult {
+public sealed class TeamRoleResult : PreconditionResult, IExceptionResult {
 
     private static readonly TeamRoleResult Success = new(null, null, null, null, null);
 
