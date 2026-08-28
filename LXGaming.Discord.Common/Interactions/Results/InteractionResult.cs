@@ -2,7 +2,7 @@ using Discord.Interactions;
 
 namespace LXGaming.Discord.Common.Interactions.Results;
 
-public class InteractionResult : RuntimeResult {
+public sealed class InteractionResult : RuntimeResult {
 
     private static readonly InteractionResult Success = new(null, null, null);
 
