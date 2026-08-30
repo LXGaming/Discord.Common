@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LXGaming.Discord.Common", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LXGaming.Discord.Common.Prompts", "LXGaming.Discord.Common.Prompts\LXGaming.Discord.Common.Prompts.csproj", "{242DE2DA-CD49-49F2-8C54-73150903F4DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LXGaming.Discord.Common.Example", "LXGaming.Discord.Common.Example\LXGaming.Discord.Common.Example.csproj", "{3D501017-AE15-4B88-AC71-23B52FB3677F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{242DE2DA-CD49-49F2-8C54-73150903F4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{242DE2DA-CD49-49F2-8C54-73150903F4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{242DE2DA-CD49-49F2-8C54-73150903F4DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D501017-AE15-4B88-AC71-23B52FB3677F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D501017-AE15-4B88-AC71-23B52FB3677F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D501017-AE15-4B88-AC71-23B52FB3677F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D501017-AE15-4B88-AC71-23B52FB3677F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
