@@ -30,6 +30,7 @@ public abstract class InteractionBase<T> : InteractionModuleBase<T> where T : cl
         }
 
         try {
+            // Ensure that the DeferTask has been completed.
             await DeferTask.ConfigureAwait(false);
         } catch (Exception) {
             // no-op
@@ -43,6 +44,7 @@ public abstract class InteractionBase<T> : InteractionModuleBase<T> where T : cl
         }
 
         EnsureResponse(false);
+        // Defer awaiting defer until a later operation or after execute.
         DeferTask = base.DeferAsync(ephemeral, options);
         return Task.CompletedTask;
     }

@@ -25,6 +25,7 @@ public sealed class RequireTeamRoleAttribute(TeamRole role) : PreconditionAttrib
             return TeamRoleResult.FromError("You must be a team member to run this interaction.", null, Role);
         }
 
+        // Lower values indicate higher privilege.
         if (userRole > Role) {
             return TeamRoleResult.FromError(
                 $"You must be a team member with the '{Role}' role to run this interaction.", userRole, Role);

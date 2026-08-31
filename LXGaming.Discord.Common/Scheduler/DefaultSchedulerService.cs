@@ -61,6 +61,7 @@ public class DefaultSchedulerService(
         [CallerMemberName] string? caller = null) {
         ObjectDisposedException.ThrowIf(_disposed, this);
         return ScheduleEventAsync(async context => {
+            // This replaces the InteractionService AutoServiceScopes functionality.
             await using var scope = serviceScopeFactory.CreateAsyncScope();
             await func(context, scope.ServiceProvider).ConfigureAwait(false);
         }, caller);
@@ -87,6 +88,8 @@ public class DefaultSchedulerService(
                 await Task.Delay(timeout, context.CancelToken).ConfigureAwait(false);
             } catch (TaskCanceledException) {
                 if (!context.StopToken.IsCancellationRequested) {
+                    // When the StopToken hasn't been cancelled we must cease execution,
+                    // the message has either been deleted or is no longer deletable.
                     return;
                 }
             }

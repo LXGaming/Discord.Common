@@ -15,7 +15,7 @@ public static class Constants {
 
     public static class Discord {
 
-        public static readonly Color Blurple = new(5793266U);
-        public static readonly Color LegacyBlurple = new(7506394U);
+        public static readonly Color Blurple = new(5793266U); // #5865F2
+        public static readonly Color LegacyBlurple = new(7506394U); // #7289DA
     }
 }

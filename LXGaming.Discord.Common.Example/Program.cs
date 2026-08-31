@@ -25,6 +25,7 @@ try {
     builder.Services.AddAccessService<AccessService>();
     builder.Services.AddDiscordClient(new DiscordSocketClient(new DiscordSocketConfig {
         GatewayIntents = GatewayIntents.Guilds | GatewayIntents.GuildMessages | GatewayIntents.DirectMessages,
+        // Requires a stable system clock, easier to just disable it.
         UseInteractionSnowflakeDate = false
     }));
     builder.Services.AddDiscordService<DiscordService>();

@@ -38,11 +38,13 @@ public class LogListener(
             LogSeverity.Error => LogLevel.Error,
             LogSeverity.Warning => LogLevel.Warning,
             LogSeverity.Info => LogLevel.Information,
+            // Discord.Net has swapped Debug and Verbose.
             LogSeverity.Verbose => LogLevel.Debug,
             LogSeverity.Debug => LogLevel.Trace,
             _ => LogLevel.None
         };
 
+        // This should never happen.
         Debug.Assert(level != LogLevel.None, $"{message.Severity} is not supported.");
         if (logger.IsEnabled(level)) {
             logger.Log(level, message.Exception, "[{Source}] {Message}", message.Source, message.Message);
