@@ -81,20 +81,17 @@ public static class InteractionUtils {
 
     public static string ToString(IMessageInteractionMetadata metadata) {
         var stringBuilder = new StringBuilder();
-        while (true) {
-            switch (metadata) {
-                case ApplicationCommandInteractionMetadata applicationCommand:
-                    stringBuilder.Append(applicationCommand.Name);
-                    break;
-                case MessageComponentInteractionMetadata messageComponent:
-                    stringBuilder.Append(messageComponent.InteractedMessageId);
-                    break;
-                case ModalSubmitInteractionMetadata modalSubmit:
-                    metadata = modalSubmit.TriggeringInteractionMetadata;
-                    continue;
-            }
+        if (metadata is ModalSubmitInteractionMetadata modalSubmit) {
+            metadata = modalSubmit.TriggeringInteractionMetadata;
+        }
 
-            break;
+        switch (metadata) {
+            case ApplicationCommandInteractionMetadata applicationCommand:
+                stringBuilder.Append(applicationCommand.Name);
+                break;
+            case MessageComponentInteractionMetadata messageComponent:
+                stringBuilder.Append(messageComponent.InteractedMessageId);
+                break;
         }
 
         Debug.Assert(stringBuilder.Length > 0);
